@@ -1,0 +1,15 @@
+{
+  "name": "net-promoter-score",
+  "version": "1.0.0",
+  "description": "API desenvolvida em NodeJS a partir das aulas da Next Level Week 4, da Rocketseat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "João Paulo de Faveri",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
