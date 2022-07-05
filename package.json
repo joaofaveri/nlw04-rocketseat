@@ -4,7 +4,8 @@
   "description": "API desenvolvida em NodeJS a partir das aulas da Next Level Week 4, da Rocketseat",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js -d src/database/app-data-source.ts"
   },
   "keywords": [],
   "author": "João Paulo de Faveri",
