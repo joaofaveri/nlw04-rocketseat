@@ -8,6 +8,20 @@ class UserController {
 
     const userRepository = npsDataSource.getRepository(User)
 
+    const userAlreadyExists = await userRepository.findOne({
+      where: {
+        email,
+      },
+    })
+
+    console.log(userAlreadyExists)
+
+    if (userAlreadyExists) {
+      return response.status(400).json({
+        error: 'User already exists!',
+      })
+    }
+
     const user = userRepository.create({
       name,
       email,
