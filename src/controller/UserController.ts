@@ -1,14 +1,11 @@
 import { Request, Response } from 'express'
-import { User } from '../models/User'
-import npsDataSource from '../database/app-data-source'
+import { UserRepository } from '../repositories/UserRepository'
 
 class UserController {
   async create(request: Request, response: Response) {
     const { name, email } = request.body
 
-    const userRepository = npsDataSource.getRepository(User)
-
-    const userAlreadyExists = await userRepository.findOne({
+    const userAlreadyExists = await UserRepository.findOne({
       where: {
         email,
       },
@@ -22,12 +19,12 @@ class UserController {
       })
     }
 
-    const user = userRepository.create({
+    const user = UserRepository.create({
       name,
       email,
     })
 
-    await userRepository.save(user)
+    await UserRepository.save(user)
 
     return response.json(user)
   }
