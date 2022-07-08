@@ -4,8 +4,11 @@ import { npsDataSource } from '../database/app-data-source'
 
 describe('Users', () => {
   beforeAll(async () => {
-    const connection = await npsDataSource.initialize()
-    await connection.runMigrations()
+    if (!npsDataSource.isInitialized) {
+      const connection = await npsDataSource.initialize()
+      await connection.dropDatabase()
+      await connection.runMigrations()
+    }
   })
 
   it('Should be able to create a new user', async () => {
