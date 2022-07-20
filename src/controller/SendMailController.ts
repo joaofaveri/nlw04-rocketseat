@@ -53,8 +53,6 @@ class SendMailController {
       link: process.env.URL_MAIL,
     }
 
-    console.log('ENV: ', process.env.URL_MAIL)
-
     if (surveyUserAlreadyExists) {
       await SendMailService.execute(
         email,
