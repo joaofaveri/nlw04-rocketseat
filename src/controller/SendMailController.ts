@@ -34,14 +34,8 @@ class SendMailController {
     }
 
     const surveyUserAlreadyExists = await SurveyUserRepository.findOne({
-      where: [
-        {
-          user_id: userAlreadyExists.id,
-        },
-        {
-          value: null,
-        },
-      ],
+      where: [{ user_id: userAlreadyExists.id }, { value: null }],
+      relations: ['user', 'survey'],
     })
 
     const pathToTemplate = resolve(__dirname, '../views/emails/npsMail.hbs')
