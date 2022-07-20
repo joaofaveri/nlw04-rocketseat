@@ -1,0 +1,29 @@
+GET http://localhost:5000/surveys
+
+###
+POST http://localhost:5000/surveys
+Content-Type: application/json
+
+{
+	"title": "Segunda Pesquisa de Opinião",
+	"description": "De 0 a 10, o quanto você está satisfeito com esse curso?"
+}
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+	"name": "Mateus Esch",
+	"email": "mateus.esch@gmail.com"
+}
+
+
+###
+POST http://localhost:5000/sendmail
+Content-Type: application/json
+
+{
+	"email": "joao.faveri@gmail.com",
+	"survey_id": "c07c16ed-97f5-401f-8b2c-ee08bb961a93"
+}
