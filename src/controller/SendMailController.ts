@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { SurveyRepository } from '../repositories/SurveyRepository'
 import { SurveyUserRepository } from '../repositories/SurveyUserRepository'
 import { UserRepository } from '../repositories/UserRepository'
+import SendMailService from '../services/SendMailService'
 
 class SendMailController {
   async execute(request: Request, response: Response) {
@@ -38,6 +39,11 @@ class SendMailController {
     })
     await SurveyUserRepository.save(surveyUser)
     // Send email
+    await SendMailService.execute(
+      email,
+      surveyAlreadyExists.title,
+      surveyAlreadyExists.description
+    )
 
     return response.json(surveyUser)
   }
