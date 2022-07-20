@@ -2,7 +2,9 @@ import 'reflect-metadata'
 import express from 'express'
 import { npsDataSource } from './database/app-data-source'
 import { router } from './routes'
+import * as dotenv from 'dotenv'
 
+dotenv.config()
 npsDataSource
   .initialize()
   .then(() =>
