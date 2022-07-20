@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { resolve } from 'path'
 import { SurveyRepository } from '../repositories/SurveyRepository'
 import { SurveyUserRepository } from '../repositories/SurveyUserRepository'
 import { UserRepository } from '../repositories/UserRepository'
@@ -39,10 +40,17 @@ class SendMailController {
     })
     await SurveyUserRepository.save(surveyUser)
     // Send email
+    const pathToTemplate = resolve(__dirname, '../views/emails/npsMail.hbs')
+    const variables = {
+      name: userAlreadyExists.name,
+      title: surveyAlreadyExists.title,
+      description: surveyAlreadyExists.description,
+    }
     await SendMailService.execute(
       email,
-      surveyAlreadyExists.title,
-      surveyAlreadyExists.description
+      `${userAlreadyExists.name.split(' ')[0]}, queremos saber sua opinião!`,
+      variables,
+      pathToTemplate
     )
 
     return response.json(surveyUser)

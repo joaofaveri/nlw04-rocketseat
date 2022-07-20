@@ -1,7 +1,6 @@
-import nodemailer, { Transporter } from 'nodemailer'
-import { resolve } from 'path'
 import fs from 'fs'
 import handlebars from 'handlebars'
+import nodemailer, { Transporter } from 'nodemailer'
 
 class SendMailService {
   private client: Transporter
@@ -30,18 +29,11 @@ class SendMailService {
     })
   }
 
-  async execute(to: string, subject: string, body: string) {
-    const pathToTemplate = resolve(__dirname, '../views/emails/npsMail.hbs')
-    const templateFileContent = fs
-      .readFileSync(pathToTemplate)
-      .toString('utf-8')
+  async execute(to: string, subject: string, variables: object, path: string) {
+    const templateFileContent = fs.readFileSync(path).toString('utf-8')
 
     const mailTemplateParse = handlebars.compile(templateFileContent)
-    const html = mailTemplateParse({
-      name: to,
-      title: subject,
-      description: body,
-    })
+    const html = mailTemplateParse(variables)
     // Message Object
     const message = {
       to,
