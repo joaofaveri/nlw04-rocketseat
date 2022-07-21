@@ -11,6 +11,11 @@ describe('Surveys', () => {
     }
   })
 
+  afterAll(async () => {
+    await npsDataSource.dropDatabase()
+    await npsDataSource.destroy()
+  })
+
   it('Should be able to create a new survey', async () => {
     const response = await request(app).post('/surveys').send({
       title: 'Survey Title Example',

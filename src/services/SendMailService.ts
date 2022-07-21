@@ -12,8 +12,6 @@ class SendMailService {
         return process.exit(1)
       }
 
-      console.log('Credentials obtained')
-
       // Create a SMTP transporter object
       const transporter = nodemailer.createTransport({
         host: account.smtp.host,

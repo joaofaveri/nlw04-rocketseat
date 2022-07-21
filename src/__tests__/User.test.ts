@@ -11,6 +11,11 @@ describe('Users', () => {
     }
   })
 
+  afterAll(async () => {
+    await npsDataSource.dropDatabase()
+    await npsDataSource.destroy()
+  })
+
   it('Should be able to create a new user', async () => {
     const response = await request(app).post('/users').send({
       name: 'User Example',
