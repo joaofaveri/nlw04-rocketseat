@@ -1,2 +1,6 @@
 node_modules
 .vscode/settings.json
+*.sqlite
+*.lock
+*.log
+*.tmp
