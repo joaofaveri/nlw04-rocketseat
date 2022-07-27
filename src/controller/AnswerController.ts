@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { AppError } from '../errors/AppError'
 import { SurveyUserRepository } from '../repositories/SurveyUserRepository'
 
 class AnswerController {
@@ -11,9 +12,7 @@ class AnswerController {
     })
 
     if (!surveyUser) {
-      return response.status(400).json({
-        error: 'Survey User does not exists!',
-      })
+      throw new AppError('Survey User does not exists!')
     }
 
     surveyUser.value = Number(value)

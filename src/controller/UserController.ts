@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { AppError } from '../errors/AppError'
 import { UserRepository } from '../repositories/UserRepository'
 
 class UserController {
@@ -14,9 +15,7 @@ class UserController {
     console.log(userAlreadyExists)
 
     if (userAlreadyExists) {
-      return response.status(400).json({
-        error: 'User already exists!',
-      })
+      throw new AppError('User already exists!')
     }
 
     const user = UserRepository.create({

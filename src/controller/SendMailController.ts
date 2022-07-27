@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { resolve } from 'path'
+import { AppError } from '../errors/AppError'
 import { SurveyRepository } from '../repositories/SurveyRepository'
 import { SurveyUserRepository } from '../repositories/SurveyUserRepository'
 import { UserRepository } from '../repositories/UserRepository'
@@ -16,9 +17,7 @@ class SendMailController {
     })
 
     if (!userAlreadyExists) {
-      return response.status(400).json({
-        error: 'User does not exists',
-      })
+      throw new AppError('User does not exists')
     }
 
     const surveyAlreadyExists = await SurveyRepository.findOne({
@@ -28,9 +27,7 @@ class SendMailController {
     })
 
     if (!surveyAlreadyExists) {
-      return response.status(400).json({
-        error: 'Survey does not exist',
-      })
+      throw new AppError('Survey does not exist')
     }
 
     const surveyUserAlreadyExists = await SurveyUserRepository.findOne({
