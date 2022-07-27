@@ -1,8 +1,10 @@
 import 'reflect-metadata'
-import express from 'express'
+import express, { NextFunction, Request, Response } from 'express'
+import 'express-async-errors'
 import { npsDataSource } from './database/app-data-source'
 import { router } from './routes'
 import * as dotenv from 'dotenv'
+import { AppError } from './errors/AppError'
 
 dotenv.config()
 npsDataSource
@@ -20,5 +22,18 @@ const app = express()
 
 app.use(express.json())
 app.use(router)
+
+app.use((error: Error, request: Request, response: Response) => {
+  if (error instanceof AppError) {
+    return response.status(error.statusCode).json({
+      message: error.message,
+    })
+  }
+
+  return response.status(500).json({
+    status: 'Error',
+    message: `Internal server error: ${error.message}`,
+  })
+})
 
 export { app }
