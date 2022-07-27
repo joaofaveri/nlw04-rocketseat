@@ -1,10 +1,10 @@
-import 'reflect-metadata'
-import express, { NextFunction, Request, Response } from 'express'
-import 'express-async-errors'
-import { npsDataSource } from './database/app-data-source'
-import { router } from './routes'
 import * as dotenv from 'dotenv'
+import express, { Request, Response } from 'express'
+import 'express-async-errors'
+import 'reflect-metadata'
+import { npsDataSource } from './database/app-data-source'
 import { AppError } from './errors/AppError'
+import { router } from './routes'
 
 dotenv.config()
 npsDataSource
